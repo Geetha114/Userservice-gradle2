@@ -1,0 +1,94 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME}
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: ${SPRING_SECURITY_OAUTH2_RESOURCE_SERVER_JWT_ISSUER_URI}
+          jwk-set-uri: ${SPRING_SECURITY_OAUTH2_RESOURCE_SERVER_JWT_JWK_SET_URI}
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+
+  jpa:
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM}
+    show-sql: ${SPRING_JPA_SHOW_SQL}
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      naming:
+        physical-strategy: ${SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY}
+
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE}
+          auth: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH}
+          timeout: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_TIMEOUT}
+          connectiontimeout: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_CONNECTIONTIMEOUT}
+          writetimeout: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_WRITETIMEOUT}
+    host: ${SPRING_MAIL_HOST}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    port: ${SPRING_MAIL_PORT}
+
+  liquibase:
+    change-log: classpath:liquibase/master-changelog.xml
+
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${SERVER_SERVLET_CONTEXT_PATH}
+    multipart:
+      max-file-size: ${SERVER_SERVLET_MULTIPART_MAX_FILE_SIZE}
+      max-request-size: ${SERVER_SERVLET_MULTIPART_MAX_REQUEST_SIZE}
+      enabled: ${SERVER_SERVLET_MULTIPART_ENABLED}
+
+jwt:
+  auth:
+    converter:
+      resource-id: ${JWT_AUTH_CONVERTER_RESOURCE_ID}
+      principle-attribute: ${JWT_AUTH_CONVERTER_PRINCIPLE_ATTRIBUTE}
+
+keycloak:
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL}
+  bearer-only: ${KEYCLOAK_BEARER_ONLY}
+  client-secret: ${KEYCLOAK_CLIENT_SECRET}
+  realm: ${KEYCLOAK_REALM}
+  client-id: ${KEYCLOAK_CLIENT_ID}
+  ssl-required: ${KEYCLOAK_SSL_REQUIRED}
+  use-resource-role-mappings: ${KEYCLOAK_USE_RESOURCE_ROLE_MAPPINGS}
+
+app:
+  rate:
+    limit: ${APP_RATE_LIMIT}
+    durationinms: ${APP_RATE_DURATIONINMS}
+
+infobip:
+  api:
+    url: ${INFOBIP_API_URL}
+    key: ${INFOBIP_API_KEY}
+    from: ${INFOBIP_API_FROM}
+
+springdoc:
+  server:
+    local: ${SPRINGDOC_SERVER_LOCAL}
+    development: ${SPRINGDOC_SERVER_DEVELOPMENT}
+
+awsProperties:
+  region: ${AWSPROPERTIES_REGION}
+  accessKey: ${AWSPROPERTIES_ACCESSKEY}
+  secretKey: ${AWSPROPERTIES_SECRETKEY}
+  bucketName: ${AWSPROPERTIES_BUCKETNAME}
+
+uqudo:
+  authUrl: ${UQUDO_AUTH_URL}
+  apiUrl: ${UQUDO_API_URL}
+  clientId: ${UQUDO_CLIENT_ID}
+  clientSecret: ${UQUDO_CLIENT_SECRET}

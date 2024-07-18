@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="yap_young">
+        <loadUpdateData encoding="UTF-8"
+                        file="liquibase/changelogs/csv/country.csv"
+                        separator=","
+                        primaryKey="country_id"
+                        tableName="country"/>
+
+        <loadUpdateData encoding="UTF-8"
+                        file="liquibase/changelogs/csv/notification_type.csv"
+                        separator=","
+                        primaryKey="notification_type_id"
+                        tableName="notification_type"/>
+    </changeSet>
+
+</databaseChangeLog>

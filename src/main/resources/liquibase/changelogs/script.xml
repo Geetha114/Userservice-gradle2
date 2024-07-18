@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- Create table country -->
+    <changeSet id="1" author="yap_young">
+        <createTable tableName="country">
+            <column name="country_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Create table notification_type -->
+        <createTable tableName="notification_type">
+            <column name="notification_type_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Create table verification_code -->
+        <createTable tableName="verification_code">
+            <column name="verification_code_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_expired" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_used" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="child_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Create table notification_log -->
+        <createTable tableName="notification_log">
+            <column name="notification_log_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="body" type="VARCHAR(5000)"/>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="error_message" type="VARCHAR(255)"/>
+            <column name="recipient" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+
+        <!-- Create table user_profile -->
+        <createTable tableName="user_profile">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_color" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_display_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="yap_tag" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="child_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_picture_url" type="VARCHAR(500)"/>
+            <column name="file_name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <!-- Create table secret_code -->
+        <createTable tableName="secret_code">
+            <column name="secret_code_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="child_id" type="VARCHAR(255)"/>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_expired" type="BOOLEAN"/>
+            <column name="is_used" type="BOOLEAN"/>
+            <column name="parent_id" type="BIGINT"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+
+        <!-- Create table user_device -->
+        <createTable tableName="user_device">
+            <column name="user_device_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="device_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="os_version" type="VARCHAR(255)"/>
+            <column name="location" type="VARCHAR(255)"/>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+
+        <!-- Add foreign key constraints -->
+        <addForeignKeyConstraint constraintName="fk_notification_type_id"
+                                 baseTableName="verification_code"
+                                 baseColumnNames="notification_type_id"
+                                 referencedTableName="notification_type"
+                                 referencedColumnNames="notification_type_id"/>
+
+        <addForeignKeyConstraint constraintName="fk_notification_log_type_id"
+                                 baseTableName="notification_log"
+                                 baseColumnNames="notification_type_id"
+                                 referencedTableName="notification_type"
+                                 referencedColumnNames="notification_type_id"/>
+    </changeSet>
+
+</databaseChangeLog>
